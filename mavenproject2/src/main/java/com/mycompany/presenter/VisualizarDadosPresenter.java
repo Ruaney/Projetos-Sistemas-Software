@@ -24,6 +24,7 @@ public class VisualizarDadosPresenter {
     private DefaultTableModel tmDados;
 
     public VisualizarDadosPresenter(DadoCollection dados) {
+       
         view = new ResultadosView();
         view.getBtnFechar().addActionListener(new ActionListener() {
             @Override
@@ -35,21 +36,25 @@ public class VisualizarDadosPresenter {
                 new Object[][]{},
                 new String[]{"Estatistica", "valor"}
         );
-        Object[][] d = {
-            {"Desvio padrao: ", +dados.getLastDado().getDesvio()},
-            {"Maior: ", +dados.getLastDado().getMaior()},
-            {"Media: ", +dados.getLastDado().getMedia()},
-            {"Menor: ", +dados.getLastDado().getMenor()},
-            {"Somatorio: ", +dados.getLastDado().getSomatorio()},
-            {"Variancia: ", +dados.getLastDado().getVariancia()}};
 
         view.getTblEstatistica().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tmDados.setNumRows(0);
+        Object[][] data = {
+            {"Desvio padrao: ", dados.getLastDado().getDesvio()},
+            {"Maior: ", dados.getLastDado().getMaior()},
+            {"Media: ", dados.getLastDado().getMedia()},
+            {"Menor: ", dados.getLastDado().getMenor()},
+            {"Somatorio: ", dados.getLastDado().getSomatorio()},
+            {"Variancia: ", dados.getLastDado().getVariancia()}
+        };
 
-        ListIterator<Double> it = dados.getLastDado().getNumeros().listIterator();
-        tmDados.addRow(new Object[]{d,});
+        for (Object[] row : data) {
+            tmDados.addRow(row);
+        }
+
         view.getTblEstatistica().setModel(tmDados);
         view.setVisible(true);
+         
     }
 
     public void fechar() {

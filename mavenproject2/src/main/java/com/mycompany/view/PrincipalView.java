@@ -10,6 +10,7 @@ import com.mycompany.models.importarDados.ImportarCSV;
 import com.mycompany.presenter.ImportarDadosPresenter;
 import com.mycompany.presenter.VisualizarDadosPresenter;
 import java.util.ListIterator;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -150,7 +151,11 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_miCalcularEstatisticaActionPerformed
 
     private void miVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisualizarActionPerformed
-        VisualizarDadosPresenter presenter = new VisualizarDadosPresenter(dados);
+       if(dados.isEmpty()){
+            JOptionPane.showMessageDialog(this, "estatísticas não foram calculadas.", "ERROR",JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            VisualizarDadosPresenter presenter = new VisualizarDadosPresenter(dados);
+       }
     }//GEN-LAST:event_miVisualizarActionPerformed
 
 

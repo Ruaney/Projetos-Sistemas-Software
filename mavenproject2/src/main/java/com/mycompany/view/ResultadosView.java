@@ -33,6 +33,7 @@ public class ResultadosView extends javax.swing.JFrame {
         btnFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Resultados cálculos estatísticos");
 
         lblSelectData.setText("Seleciona a data do resultado calculado:");
 
