@@ -21,15 +21,14 @@ import javax.swing.table.DefaultTableModel;
 public class ImportarDadosPresenter {
 
     private IImportarArquivo tipoArq;
-    private DadoCollection dados;
     private DefaultTableModel tmDados;
-    private PrincipalView view;
 
     public ImportarDadosPresenter(IImportarArquivo tipoArq, DadoCollection dados, PrincipalView view) {
         this.tipoArq = tipoArq;
-        this.dados = dados;
-        this.view = view;
-        lerArquivo();
+      
+        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView());
+        j.showSaveDialog(null);
+        this.tipoArq.processar(j.getSelectedFile(), dados);
         tmDados = new DefaultTableModel(
                 new Object[][]{},
                 new String[]{"Dado"}
@@ -44,11 +43,5 @@ public class ImportarDadosPresenter {
             tmDados.addRow(new Object[]{dado});
         }
         view.getTblDados().setModel(tmDados);
-    }
-
-    public void lerArquivo() {
-        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView());
-        j.showSaveDialog(null);
-        this.tipoArq.processar(j.getSelectedFile(), dados);
     }
 }
